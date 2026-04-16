@@ -1,11 +1,12 @@
-# Setting Up Claude (Desktop App + Claude Code CLI)
+# Setting Up Claude (Desktop App + Claude Code)
 
-This guide covers two tools from Anthropic:
+This guide covers three tools from Anthropic:
 
 - **Claude Desktop** — a desktop app for chatting with Claude (like ChatGPT but from Anthropic)
-- **Claude Code** — a command-line coding agent that lives in your terminal and can read, write, and run code
+- **Claude Code VS Code extension** — Claude Code integrated directly into VS Code (easiest for most people)
+- **Claude Code CLI** — a command-line coding agent that lives in your terminal (power users)
 
-You can use either or both depending on your workflow.
+You can use any combination depending on your workflow.
 
 ---
 
@@ -38,9 +39,31 @@ That's it — you're ready to chat.
 
 ---
 
-## Part 2 — Claude Code (terminal agent)
+## Part 2 — Claude Code in VS Code (recommended)
 
-Claude Code is a coding agent that runs in your terminal. It can understand your codebase, edit files, run commands, and work with git — all through natural language.
+If you use VS Code, this is the easiest way to get Claude Code. The extension includes the full CLI built in, so you **don't need to install the CLI separately**.
+
+### Install
+
+1. Open VS Code.
+2. Go to the Extensions panel (`Cmd+Shift+X` on Mac / `Ctrl+Shift+X` on Windows).
+3. Search for **"Claude Code"** and install the official extension by Anthropic.
+4. Alternatively, follow the setup guide at [code.claude.com/docs/en/vs-code](https://code.claude.com/docs/en/vs-code).
+
+Once installed, Claude Code appears as a panel inside VS Code. You can also use it in VS Code's integrated terminal — the `claude` command is available automatically.
+
+### First run
+
+1. Open a project folder in VS Code.
+2. Open the Claude Code panel (look for the Claude icon in the sidebar).
+3. A browser window will open for sign-in the first time. Complete it.
+4. You're ready — type natural language requests directly in the panel.
+
+---
+
+## Part 3 — Claude Code CLI (power users)
+
+If you prefer working in the terminal outside of VS Code, or want the full standalone CLI experience, install it separately. This is optional if you already have the VS Code extension.
 
 ### Install on Mac / Linux
 
@@ -123,9 +146,10 @@ For winget: `winget upgrade Anthropic.ClaudeCode`
 ## Tips for beginners
 
 - **Claude Desktop** is great for brainstorming, asking questions, and getting explanations.
-- **Claude Code** is great for hands-on coding — it can read your files, make changes, and run commands directly.
-- You can use both at the same time. They use the same Anthropic account.
-- Claude Code works best when you start it from inside a project folder so it has context about your code.
+- **Claude Code in VS Code** is the easiest way to get AI coding help — it's right inside your editor with no terminal needed.
+- **Claude Code CLI** is for power users who prefer working in the terminal.
+- The VS Code extension includes the CLI, so you don't need both. But if you install the CLI separately, they share settings and conversation history.
+- All three tools use the same Anthropic account.
 
 ---
 
@@ -143,7 +167,8 @@ For winget: `winget upgrade Anthropic.ClaudeCode`
 
 ## Docs and resources
 
-- [Claude Code documentation](https://code.claude.com/docs/en/setup)
+- [Claude Code VS Code extension](https://code.claude.com/docs/en/vs-code)
+- [Claude Code CLI setup](https://code.claude.com/docs/en/setup)
 - [Claude Code on GitHub](https://github.com/anthropics/claude-code)
 - [Claude Desktop help center](https://support.claude.com/en/collections/16163169-claude-desktop)
 - [Claude Desktop download](https://claude.com/download)
