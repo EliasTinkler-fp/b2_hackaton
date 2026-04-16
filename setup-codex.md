@@ -4,6 +4,7 @@
 
 - **Codex Web App** — a browser-based interface at [chatgpt.com/codex](https://chatgpt.com/codex)
 - **Codex VS Code extension** — Codex integrated directly into VS Code (easiest for most people)
+- **Codex Desktop App** — a standalone desktop app for Mac and Windows
 - **Codex CLI** — a terminal-based coding agent (power users)
 
 ---
@@ -148,13 +149,33 @@ Then type natural language requests, just like you would with Claude Code.
 
 ---
 
-## Codex Desktop App
+## Part 4 — Codex Desktop App
 
-OpenAI also offers a Codex desktop app:
+A standalone desktop app that runs Codex on your local project folders — no browser, no terminal, no VS Code required.
 
-1. Go to [openai.com/codex](https://openai.com/codex) or the [OpenAI downloads page](https://developers.openai.com/codex/app).
-2. Download the app for your platform (macOS Apple Silicon or Windows).
-3. Install and sign in with your ChatGPT / OpenAI account.
+### Install
+
+**Mac:**
+
+- [Download for Apple Silicon (M1/M2/M3/M4)](https://persistent.oaistatic.com/codex-app-prod/Codex.dmg)
+- [Download for Intel](https://persistent.oaistatic.com/codex-app-prod/Codex-latest-x64.dmg)
+
+Open the `.dmg` file and drag Codex to your Applications folder.
+
+**Windows:**
+
+- [Download from Microsoft Store](https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi)
+
+Or visit the [Codex app page](https://developers.openai.com/codex/app) for the latest links.
+
+### First run
+
+1. Launch the Codex app.
+2. Sign in with your ChatGPT account or OpenAI API key.
+3. Choose a project folder for Codex to work in.
+4. Send a coding task — Codex reads your code and makes changes locally.
+
+> **Tip:** Create a git commit before each task so you can easily revert changes if needed.
 
 ---
 
