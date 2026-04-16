@@ -1,9 +1,10 @@
-# Setting Up OpenAI Codex (Web App + CLI)
+# Setting Up OpenAI Codex (Web App + VS Code + CLI)
 
-[Codex](https://openai.com/codex) is OpenAI's coding agent. It comes in two flavors:
+[Codex](https://openai.com/codex) is OpenAI's coding agent. It comes in three flavors:
 
 - **Codex Web App** — a browser-based interface at [chatgpt.com/codex](https://chatgpt.com/codex)
-- **Codex CLI** — a terminal-based coding agent (similar to Claude Code, but from OpenAI)
+- **Codex VS Code extension** — Codex integrated directly into VS Code (easiest for most people)
+- **Codex CLI** — a terminal-based coding agent (power users)
 
 ---
 
@@ -34,9 +35,29 @@ The web app is the easiest way to get started. No installation needed.
 
 ---
 
-## Part 2 — Codex CLI
+## Part 2 — Codex in VS Code (recommended)
 
-The CLI runs locally in your terminal, similar to Claude Code.
+If you use VS Code, this is the easiest way to get Codex. No Node.js or CLI install needed.
+
+### Install
+
+1. Open VS Code.
+2. Go to the Extensions panel (`Cmd+Shift+X` on Mac / `Ctrl+Shift+X` on Windows).
+3. Search for **"Codex"** and install the official extension by OpenAI.
+4. Alternatively, follow the setup guide at [developers.openai.com/codex/ide](https://developers.openai.com/codex/ide).
+
+### First run
+
+1. Open a project folder in VS Code.
+2. Open the Codex panel (look for the Codex icon in the sidebar).
+3. Sign in with your ChatGPT account when prompted.
+4. You're ready — type coding tasks directly in the panel.
+
+---
+
+## Part 3 — Codex CLI (power users)
+
+The standalone CLI runs in your terminal. This is optional if you already have the VS Code extension.
 
 ### Step 1 — Make sure you have Node.js
 
@@ -151,6 +172,7 @@ OpenAI also offers a Codex desktop app:
 
 ## Docs and resources
 
+- [Codex VS Code extension](https://developers.openai.com/codex/ide)
 - [Codex quickstart](https://developers.openai.com/codex/quickstart)
 - [Codex CLI docs](https://developers.openai.com/codex/cli)
 - [Codex CLI on GitHub](https://github.com/openai/codex)
