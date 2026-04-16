@@ -123,7 +123,7 @@ Pick one or both — these are the AI assistants you'll use to write code during
 | Guide | What it covers |
 |---|---|
 | [Setting up Claude](setup-claude.md) | Claude Desktop app + Claude Code VS Code extension + CLI (Anthropic) |
-| [Setting up Codex](setup-codex.md) | Codex web app + Codex CLI (OpenAI) |
+| [Setting up Codex](setup-codex.md) | Codex web app + VS Code extension + CLI (OpenAI) |
 
 #### 2. Set up Python
 
