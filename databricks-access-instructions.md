@@ -29,9 +29,9 @@ This is all most people need.
 
 ---
 
-## 2. Optional: CLI and IDE access
+## 2. CLI/API and IDE access
 
-Only needed if you want to run notebooks/jobs from your laptop, use the Databricks VS Code extension, or script against the workspace. Skip this section if you only need the web UI.
+Needed for AI to access Databricks Data. You can skip this section if you only need the web UI and dont plan AI to inteact with your data.
 
 ### Install the Databricks CLI
 
