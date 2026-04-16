@@ -36,7 +36,7 @@ curl -fsSL https://claude.ai/install.sh | bash && git clone https://github.com/F
 **Using Codex CLI** (requires Node.js 18+ — install from [nodejs.org](https://nodejs.org/) first if needed):
 
 ```bash
-npm install -g @openai/codex && git clone https://github.com/FinityPeople/fpaihack.git && cd fpaihack && codex "Read all the setup guides in this repo (setup-python.md, setup-claude.md, databricks-access-instructions.md, mcp-databricks-claude.md). Check what is already installed on this machine and help me install and configure everything that is missing. Walk me through anything that needs my input (like signing in). Skip what is already done."
+npm install -g @openai/codex && git clone https://github.com/FinityPeople/fpaihack.git && cd fpaihack && codex "Read all the setup guides in this repo (setup-python.md, setup-claude.md, databricks-access-instructions.md, mcp-databricks-codex.md). Check what is already installed on this machine and help me install and configure everything that is missing. Walk me through anything that needs my input (like signing in). Skip what is already done."
 ```
 
 #### Windows
@@ -50,7 +50,7 @@ irm https://claude.ai/install.ps1 | iex; git clone https://github.com/FinityPeop
 **Using Codex CLI — PowerShell** (requires Node.js 18+ — run `winget install OpenJS.NodeJS.LTS` first if needed):
 
 ```powershell
-npm install -g @openai/codex; git clone https://github.com/FinityPeople/fpaihack.git; cd fpaihack; codex "Read all the setup guides in this repo (setup-python.md, setup-claude.md, databricks-access-instructions.md, mcp-databricks-claude.md). Check what is already installed on this machine and help me install and configure everything that is missing. Walk me through anything that needs my input (like signing in). Skip what is already done."
+npm install -g @openai/codex; git clone https://github.com/FinityPeople/fpaihack.git; cd fpaihack; codex "Read all the setup guides in this repo (setup-python.md, setup-claude.md, databricks-access-instructions.md, mcp-databricks-codex.md). Check what is already installed on this machine and help me install and configure everything that is missing. Walk me through anything that needs my input (like signing in). Skip what is already done."
 ```
 
 > **Don't have git?** The AI will notice and help you install it. On Windows, download [Git for Windows](https://git-scm.com/downloads/win) first. On Mac, running `git` in the terminal will prompt you to install the Xcode Command Line Tools automatically.
@@ -80,10 +80,10 @@ Then paste this prompt:
 
 ```
 Read all the setup guides in this repo (setup-python.md, setup-codex.md,
-setup-claude.md, databricks-access-instructions.md, mcp-databricks-claude.md).
-Check what is already installed on this machine and help me install and
-configure everything that is missing. Walk me through anything that needs my
-input (like signing in). Skip what is already done.
+setup-claude.md, databricks-access-instructions.md, mcp-databricks-claude.md,
+mcp-databricks-codex.md). Check what is already installed on this machine and
+help me install and configure everything that is missing. Walk me through
+anything that needs my input (like signing in). Skip what is already done.
 ```
 
 ---
@@ -128,13 +128,14 @@ Our shared data platform for the hackathon:
 
 **Workspace URL:** https://adb-7405616827368959.19.azuredatabricks.net/
 
-#### 4. Connect Claude Code to Databricks via MCP (optional)
+#### 4. Connect your AI tool to Databricks via MCP (optional)
 
-Want Claude Code to query Databricks data directly from your terminal? This guide sets up the MCP (Model Context Protocol) bridge so Claude can browse catalogs, run SQL, and interact with your workspace data.
+Want your AI coding tool to query Databricks data directly from the terminal? These guides set up the MCP (Model Context Protocol) bridge so the AI can browse catalogs, run SQL, and interact with your workspace data.
 
 | Guide | What it covers |
 |---|---|
-| [Databricks MCP + Claude Code setup](mcp-databricks-claude.md) | CLI auth, MCP config, endpoint selection, verification |
+| [Databricks MCP + Claude Code setup](mcp-databricks-claude.md) | MCP config for Claude Code — `.mcp.json`, endpoint selection, verification |
+| [Databricks MCP + Codex setup](mcp-databricks-codex.md) | MCP config for Codex CLI — `codex mcp add`, config.toml, verification |
 
 ---
 
@@ -171,7 +172,8 @@ At minimum:
 ├── setup-codex.md                     ← OpenAI Codex web app + CLI setup
 ├── setup-python.md                    ← Python installation with uv
 ├── databricks-access-instructions.md  ← Databricks workspace access
-└── mcp-databricks-claude.md           ← Connect Claude Code to Databricks via MCP
+├── mcp-databricks-claude.md           ← Connect Claude Code to Databricks via MCP
+└── mcp-databricks-codex.md            ← Connect Codex CLI to Databricks via MCP
 ```
 
 ---
