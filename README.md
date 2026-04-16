@@ -8,6 +8,19 @@ Welcome to the AI Development Hackathon! This repo contains everything you need 
 
 There are two ways to get set up — pick whichever feels more comfortable:
 
+### Before you start — you need a paid subscription
+
+The AI coding tools require a paid plan. **Sign up and log in first**, then come back here.
+
+| Tool | Sign up | Required plan |
+|---|---|---|
+| **Claude Code** | [claude.ai](https://claude.ai) | Pro ($20/mo), Max ($100–200/mo), Teams, or Enterprise. The free plan does **not** include Claude Code. |
+| **Codex CLI** | [chatgpt.com](https://chatgpt.com) | Plus, Pro, Business, Edu, or Enterprise. |
+
+You only need one — pick whichever you prefer. The first time you run the tool, it will open a browser window for you to sign in. No API keys or tokens to copy around.
+
+---
+
 ### Option A: One-liner — let the AI set up everything for you
 
 The fastest path. Copy-paste **one command** into your terminal. It installs the AI tool, clones this repo, and hands off to the AI to read the setup guides and do the rest.
@@ -115,7 +128,7 @@ At minimum:
 - A laptop (Mac or Windows)
 - A browser (Chrome, Edge, Safari, or Firefox)
 - Your corporate credentials (for Databricks access)
-- An Anthropic account and/or OpenAI/ChatGPT account (for the AI tools)
+- A **paid** Anthropic account ([claude.ai](https://claude.ai) — Pro, Max, Teams, or Enterprise) and/or a **paid** OpenAI account ([chatgpt.com](https://chatgpt.com) — Plus, Pro, Business, Edu, or Enterprise)
 
 ---
 
