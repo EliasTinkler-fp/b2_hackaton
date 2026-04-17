@@ -101,13 +101,6 @@ databricks current-user me
 
 You should see your user info.
 
-### VS Code extension
-
-1. Install the **Databricks** extension from the VS Code marketplace.
-2. Open the extension panel, click **Configure Databricks**.
-3. Host: `https://adb-7405616827368959.19.azuredatabricks.net`.
-4. Auth method: **OAuth (user to machine)** — it will reuse the CLI profile you just set up.
-
 ---
 
 ## 3. Python setup
