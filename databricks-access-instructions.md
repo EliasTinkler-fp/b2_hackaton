@@ -175,8 +175,7 @@ Convention: name your schema something recognizable, e.g. `mike_sandbox` or `tea
 
 ## Questions or problems?
 
-Ping the admin in Slack/Teams with:
+Ping one of the mentors on Teams with:
 
-- Your email / UPN
 - What you tried
-- The exact error message (screenshot helps)
+- The exact error message (a screenshot helps)

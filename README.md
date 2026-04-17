@@ -216,8 +216,7 @@ At minimum:
 
 ## Questions or problems?
 
-Ping the admin in Slack/Teams with:
+Ping one of the mentors on Teams with:
 
-- Your name / email
 - What you tried
 - The exact error message (a screenshot helps)
