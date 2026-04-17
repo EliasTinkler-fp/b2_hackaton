@@ -1,6 +1,27 @@
 # Finity People AI Hackathon
 
-Welcome to the AI Development Hackathon! This repo contains everything you need to get set up and start building.
+Welcome to the AI Development Hackathon!
+
+This hackathon is **free and open** — you can build whatever you want, with whatever tools and data you choose. We've organized groups around shared interests, but you're not locked in — collaborate across groups, switch topics, or go solo. The goal is to explore, learn, and build something with AI.
+
+## What this repo is for
+
+This repo helps you get set up with **tools and data** so you can focus on building. It covers:
+
+- **AI coding assistants** (Claude Code, OpenAI Codex) to help you write code faster
+- **Databricks workspace** with shared catalogs and free Marketplace datasets
+- **Python environment** setup
+
+### Bring any data you want
+
+You're free to use any dataset for your project:
+
+- **[Databricks Marketplace](https://adb-7405616827368959.19.azuredatabricks.net/marketplace?isFree=true&o=7405616827368959&sortBy=popularity)** — free datasets already available in our workspace (see [instructions](databricks-access-instructions.md))
+- **[Kaggle Datasets](https://www.kaggle.com/datasets)** — thousands of free datasets across every domain
+- **[Hugging Face Datasets](https://huggingface.co/datasets)** — ML-ready datasets, great for NLP and AI projects
+- **Your own data** — bring anything you want to work with
+
+The Databricks setup in this repo is there if you want an easy way to access and query shared data, but it's completely optional. You can run everything locally with downloaded datasets if you prefer.
 
 ---
 
