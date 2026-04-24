@@ -40,6 +40,28 @@ Verifiera att projektet stoder:
 - revenue-analys
 - Power BI-konsumtion
 
+## Input
+
+Du ska forvanta dig att fa:
+
+- diff eller lista over andrade filer
+- grain och modellval fran `model-author`
+- testresultat eller testluckor fran `test-agent`
+- docs och antaganden fran `docs-writer`
+
+Om nagon del saknas ska du namnge det som granskningsrisk.
+
+## Output
+
+Du ska alltid lamna:
+
+- fynd sorterade efter allvarlighetsgrad
+- oppna fragor eller antaganden
+- tydlig rekommendation:
+  - redo for PR
+  - redo efter mindre fixar
+  - inte redo
+
 ## Leveransformat
 
 Svara med:

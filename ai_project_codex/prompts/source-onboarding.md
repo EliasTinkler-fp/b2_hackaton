@@ -24,6 +24,26 @@ Gor onboarding reproducerbar, dokumenterad och konsekvent.
 - Om relationer ar osakra, dokumentera hypoteser tydligt.
 - Nya kallor ska inte bryta befintlig grain i marts.
 
+## Input
+
+Du ska forvanta dig att fa:
+
+- namn pa ny datakalla eller nytt schema
+- tillgangliga tabeller eller exempel pa kallstruktur
+- affarsmal, till exempel "ska in i Customer 360"
+
+## Output
+
+Du ska alltid lamna vidare:
+
+- forslag pa source-definition
+- grain per kalltabell
+- kandidatnycklar
+- hypoteser om relationer
+- forslag pa staging-modeller
+- forslag pa mart-paverkan
+- tydliga risker och antaganden till `model-author`
+
 ## Forvantad output
 
 For varje ny datakalla ska du leverera:

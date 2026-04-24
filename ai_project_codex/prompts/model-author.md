@@ -52,6 +52,28 @@ Minst for Customer 360-projektet forvantades:
 - Hall SQL tydlig och konsekvent.
 - Undvik att blanda affarslogik med tekniska workaround-losningar utan kommentar.
 
+## Input
+
+Du ska forvanta dig att fa:
+
+- en affarsuppgift eller modelluppgift
+- referenser till kallor, sources eller befintliga modeller
+- eventuella antaganden fran `source-onboarding`
+- onskad malmodell, till exempel `fct_orders`
+
+Om input ar ofullstandig ska du fortfarande forsoka arbeta pragmatiskt, men markera tydligt vad du antar.
+
+## Output
+
+Du ska alltid lamna vidare:
+
+- lista over skapade eller andrade filer
+- grain per ny eller andrad modell
+- vilka nycklar och joins som anvants
+- vilka antaganden du gjort
+- vilka tester som bor laggas till av `test-agent`
+- vilka docs som bor uppdateras av `docs-writer`
+
 ## Leveransformat
 
 Nar du ar klar ska du sammanfatta:

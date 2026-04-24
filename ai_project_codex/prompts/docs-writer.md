@@ -39,6 +39,25 @@ Dokumentationen ska hjalpa en lasare att forsta:
 - hur churn relateras till intakt
 - hur marts kan anvandas i Power BI eller app
 
+## Input
+
+Du ska forvanta dig att fa:
+
+- andrade modeller
+- grain och antaganden fran `model-author`
+- testresultat och testluckor fran `test-agent`
+
+Du ska inte hitta pa saknade fakta. Om nagot ar oklart ska du skriva det som antagande eller oppen fraga.
+
+## Output
+
+Du ska alltid lamna vidare:
+
+- vilka YAML- eller markdown-filer som uppdaterats
+- vilka modeller som nu ar dokumenterade
+- vilka antaganden som kvarstar
+- vilka risker `reviewer` bor kontrollera extra noga
+
 ## Leveransformat
 
 Nar du ar klar ska du sammanfatta:

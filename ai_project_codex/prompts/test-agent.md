@@ -46,6 +46,25 @@ Verifiera att det finns tester for:
 - `fct_orders`
 - `fct_churn_risk_snapshot`
 
+## Input
+
+Du ska forvanta dig att fa:
+
+- lista over skapade eller andrade modeller
+- grain och nycklar fran `model-author`
+- YAML-filer eller modelldefinitioner som behover tests
+
+Om modellens grain eller nyckel ar otydlig ska du markera det som risk i stallet for att gissa.
+
+## Output
+
+Du ska alltid lamna vidare:
+
+- vilka tester som lades till eller rekommenderas
+- vilka modeller som fortfarande saknar tillracklig testning
+- vilka risker som bor beskrivas av `docs-writer`
+- vilka reviewfragor `reviewer` bor vara extra uppmarksam pa
+
 ## Leveransformat
 
 Nar du ar klar ska du redovisa:
