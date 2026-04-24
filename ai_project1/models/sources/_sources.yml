@@ -1,0 +1,108 @@
+version: 2
+
+sources:
+  - name: b2
+    database: fp_hack
+    schema: b2_stg
+    description: "Bronze/raw source tables for the B2 hackathon project"
+    tables:
+      - name: customers
+        description: "Customer master data with address, geolocation, and loyalty information"
+        columns:
+          - name: customer_id
+            description: "Unique customer identifier"
+            data_tests:
+              - not_null
+          - name: customer_name
+            description: "Full customer name"
+          - name: tax_id
+            description: "Tax identification number"
+          - name: tax_code
+            description: "Tax classification code"
+          - name: state
+            description: "State/province"
+          - name: city
+            description: "City name"
+          - name: postcode
+            description: "Postal/ZIP code"
+          - name: street
+            description: "Street name"
+          - name: number
+            description: "Street number"
+          - name: unit
+            description: "Unit/apartment number"
+          - name: region
+            description: "Geographic region"
+          - name: district
+            description: "District within region"
+          - name: lon
+            description: "Longitude coordinate"
+          - name: lat
+            description: "Latitude coordinate"
+          - name: ship_to_address
+            description: "Shipping address (formatted)"
+          - name: valid_from
+            description: "Record validity start (epoch milliseconds)"
+          - name: valid_to
+            description: "Record validity end"
+          - name: units_purchased
+            description: "Total units purchased by customer"
+          - name: loyalty_segment
+            description: "Customer loyalty segment code"
+
+      - name: sales
+        description: "Sales transaction lines with product and pricing"
+        columns:
+          - name: customer_id
+            description: "Customer identifier (FK to customers)"
+          - name: customer_name
+            description: "Denormalized customer name"
+          - name: product_name
+            description: "Product display name"
+          - name: order_date
+            description: "Date of the sales transaction"
+          - name: product_category
+            description: "Product category classification"
+          - name: product
+            description: "Product code or short name"
+          - name: total_price
+            description: "Total price for this line"
+
+      - name: sales_orders
+        description: "Sales order headers with order-level details"
+        columns:
+          - name: order_number
+            description: "Unique order identifier"
+            data_tests:
+              - not_null
+          - name: customer_id
+            description: "Customer identifier (FK to customers)"
+          - name: customer_name
+            description: "Denormalized customer name"
+          - name: order_datetime
+            description: "Order timestamp (epoch milliseconds)"
+          - name: number_of_line_items
+            description: "Count of line items in the order"
+          - name: clicked_items
+            description: "Items clicked before purchase (JSON)"
+          - name: ordered_products
+            description: "Products in this order (JSON/array)"
+          - name: promo_info
+            description: "Promotion information applied (JSON)"
+
+      - name: telco_customer_churn
+        description: "Telco customer data with service subscriptions and churn status (clean version)"
+        columns:
+          - name: customerID
+            description: "Unique telco customer identifier"
+            data_tests:
+              - not_null
+
+      - name: telco_customer_churn_missing
+        description: "Telco customer churn data with intentionally missing values (for data quality exercises)"
+
+      - name: telco_customer_churn_noisy
+        description: "Telco customer churn data with intentionally noisy values (for data quality exercises)"
+
+      - name: wine_quality_analysis
+        description: "Wine physicochemical properties and quality ratings (UCI Wine Quality dataset)"

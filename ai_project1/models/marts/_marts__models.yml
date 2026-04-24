@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: "Customer dimension with demographics, address, and loyalty data"
+    columns:
+      - name: customer_id
+        description: "Primary key"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_product
+    description: "Product dimension derived from sales data"
+    columns:
+      - name: product_key
+        description: "Surrogate primary key"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_telco_customer
+    description: "Telco customer dimension with demographics and service subscriptions"
+    columns:
+      - name: telco_customer_id
+        description: "Primary key"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: fct_sales
+    description: "Sales fact table at transaction line grain"
+    columns:
+      - name: sales_line_key
+        description: "Surrogate primary key"
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "FK to dim_customer"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+      - name: product_key
+        description: "FK to dim_product"
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_key
+
+  - name: fct_telco_churn
+    description: "Telco churn fact at customer grain"
+    columns:
+      - name: telco_customer_id
+        description: "FK to dim_telco_customer"
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_telco_customer')
+                field: telco_customer_id
+
+  - name: fct_wine_quality
+    description: "Wine quality fact table (standalone, no dimensional joins)"
+    columns:
+      - name: wine_sample_key
+        description: "Surrogate primary key"
+        data_tests:
+          - unique
+          - not_null

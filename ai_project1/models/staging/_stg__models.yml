@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: stg_b2__customers
+    description: "Staged customer master data with standardized column names and types"
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_b2__sales
+    description: "Staged sales transaction lines with surrogate key"
+    columns:
+      - name: sales_line_key
+        description: "Surrogate key for sales line"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_b2__sales_orders
+    description: "Staged sales order headers"
+    columns:
+      - name: order_number
+        description: "Unique order identifier"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_b2__telco_customer_churn
+    description: "Staged telco customer churn data (clean version)"
+    columns:
+      - name: customer_id
+        description: "Unique telco customer identifier"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_b2__wine_quality
+    description: "Staged wine quality analysis data with surrogate key"
+    columns:
+      - name: wine_sample_key
+        description: "Surrogate key for wine sample"
+        data_tests:
+          - unique
+          - not_null

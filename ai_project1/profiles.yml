@@ -1,0 +1,11 @@
+b2_warehouse:
+  target: dev
+  outputs:
+    dev:
+      type: databricks
+      catalog: fp_hack
+      schema: b2_int__martin
+      host: adb-7405616827368959.19.azuredatabricks.net
+      http_path: /sql/1.0/warehouses/cfe55031a9b649cb
+      token: "{{ env_var('DBT_DATABRICKS_TOKEN') }}"
+      threads: 4
