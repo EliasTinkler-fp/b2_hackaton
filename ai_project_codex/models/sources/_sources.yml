@@ -1,0 +1,71 @@
+version: 2
+
+sources:
+  - name: b2_stg
+    database: fp_hack
+    schema: b2_stg
+    description: "Raw source schema used for hackathon warehouse modeling."
+    tables:
+      - name: customers
+        description: "Customer master-like records with address and validity timestamps."
+        columns:
+          - name: customer_id
+            description: "Customer identifier from source."
+            tests: [not_null]
+          - name: customer_name
+            description: "Raw customer display name."
+          - name: valid_from
+            description: "Epoch-second effective start timestamp."
+          - name: valid_to
+            description: "Epoch-second effective end timestamp, often null/open."
+      - name: sales
+        description: "Sales line-level transactional dataset."
+        columns:
+          - name: customer_id
+            description: "Customer identifier associated with the line."
+            tests: [not_null]
+          - name: order_date
+            description: "Business order date."
+            tests: [not_null]
+          - name: product_name
+            description: "Sold product free-text name."
+          - name: total_price
+            description: "Line total amount."
+      - name: sales_orders
+        description: "Order activity/event records with order numbers and epoch timestamps."
+        columns:
+          - name: order_number
+            description: "Order identifier (not strictly unique in source)."
+            tests: [not_null]
+          - name: customer_id
+            description: "Customer identifier associated with order."
+            tests: [not_null]
+          - name: order_datetime
+            description: "Epoch-second order event timestamp."
+      - name: telco_customer_churn
+        description: "Base telco churn dataset by customer."
+        columns:
+          - name: customerID
+            description: "Telco customer identifier."
+            tests: [not_null, unique]
+          - name: Churn
+            description: "Target churn indicator (Yes/No)."
+      - name: telco_customer_churn_missing
+        description: "Telco churn variant with missing values injected."
+        columns:
+          - name: customerID
+            description: "Telco customer identifier."
+            tests: [not_null, unique]
+      - name: telco_customer_churn_noisy
+        description: "Telco churn variant with noisy/perturbed numeric values."
+        columns:
+          - name: customerID
+            description: "Telco customer identifier."
+            tests: [not_null, unique]
+      - name: wine_quality_analysis
+        description: "Wine physicochemical measures with quality score."
+        columns:
+          - name: quality
+            description: "Wine quality class label."
+            tests: [not_null]
+

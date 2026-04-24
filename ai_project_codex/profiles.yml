@@ -6,6 +6,6 @@ fp_hack_hackathon:
       host: https://adb-7405616827368959.19.azuredatabricks.net
       http_path: /sql/1.0/warehouses/cfe55031a9b649cb
       catalog: fp_hack
-      schema: b2_int
+      schema: ""
       threads: 4
       auth_type: oauth

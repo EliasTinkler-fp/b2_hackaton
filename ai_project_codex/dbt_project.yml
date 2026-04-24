@@ -1,0 +1,29 @@
+name: "ai_project1"
+version: "1.0.0"
+config-version: 2
+
+profile: "fp_hack_hackathon"
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+docs-paths: ["docs"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  ai_project1:
+    staging:
+      +schema: b2_stg
+      +materialized: table
+    intermediate:
+      +schema: b2_int
+      +materialized: view
+    marts:
+      +schema: b2_mart
+      +materialized: table

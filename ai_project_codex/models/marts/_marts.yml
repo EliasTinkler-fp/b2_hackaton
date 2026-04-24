@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: "Current-state conformed customer dimension derived from customer source history."
+    columns:
+      - name: customer_sk
+        description: "Primary surrogate key for customer dimension."
+        tests: [not_null, unique]
+      - name: customer_id
+        description: "Natural customer identifier from source."
+        tests: [not_null]
+
+  - name: dim_date
+    description: "Calendar date dimension spanning the observed sales and order-event timelines."
+    columns:
+      - name: date_sk
+        description: "Primary integer date key in YYYYMMDD format."
+        tests: [not_null, unique]
+      - name: date_day
+        description: "Calendar date."
+        tests: [not_null]
+
+  - name: fct_sales
+    description: "Sales line-item fact at grain: one row per source sales line."
+    columns:
+      - name: sales_fact_sk
+        description: "Primary surrogate key for sales fact rows."
+        tests: [not_null, unique]
+      - name: customer_sk
+        description: "Foreign key to dim_customer."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_sk
+      - name: date_sk
+        description: "Foreign key to dim_date."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_sk
+      - name: sales_amount
+        description: "Sales amount for the source sales line."
+        tests: [not_null]
+
+  - name: fct_telco_customer_churn
+    description: "Telco customer churn fact at grain: one row per telco customer."
+    columns:
+      - name: telco_churn_fact_sk
+        description: "Primary surrogate key for telco churn fact rows."
+        tests: [not_null, unique]
+      - name: customer_id
+        description: "Telco customer identifier."
+        tests: [not_null, unique]
+      - name: is_churned
+        description: "Customer churn outcome label as boolean."
+        tests: [not_null]
+
+  - name: fct_wine_quality
+    description: "Wine quality fact at grain: one row per wine record hash."
+    columns:
+      - name: wine_quality_fact_sk
+        description: "Primary surrogate key for wine quality fact rows."
+        tests: [not_null, unique]
+      - name: wine_record_sk
+        description: "Deterministic row key from wine staging."
+        tests: [not_null, unique]
+      - name: quality
+        description: "Wine quality class label."
+        tests: [not_null]
+      - name: quality_band
+        description: "Derived quality tier."
+        tests: [not_null]
