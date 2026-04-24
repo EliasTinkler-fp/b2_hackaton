@@ -1,8 +1,13 @@
+with customers as (
+    select * from {{ ref('stg_b2__customers') }}
+)
+
 select
-    sha2(cast(customer_id as string), 256) as customer_sk,
     customer_id,
     customer_name,
-    state_code,
+    tax_id,
+    tax_code,
+    state,
     city,
     postcode,
     street,
@@ -13,9 +18,8 @@ select
     longitude,
     latitude,
     ship_to_address,
-    valid_from_ts,
-    valid_to_ts,
+    valid_from_at,
+    valid_to_at,
     units_purchased,
     loyalty_segment
-from {{ ref('int_customer_current') }}
-
+from customers

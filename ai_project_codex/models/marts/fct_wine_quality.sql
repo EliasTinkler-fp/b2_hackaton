@@ -1,12 +1,19 @@
+with wine as (
+    select * from {{ ref('stg_b2__wine_quality') }}
+)
+
 select
-    sha2(concat_ws('||', wine_record_sk, cast(quality as string)), 256) as wine_quality_fact_sk,
-    wine_record_sk,
-    quality,
-    quality_band,
-    alcohol,
-    total_acidity,
+    wine_sample_key,
+    fixed_acidity,
+    volatile_acidity,
+    citric_acid,
     residual_sugar,
     chlorides,
+    free_sulfur_dioxide,
+    total_sulfur_dioxide,
     density,
-    free_to_total_sulfur_ratio
-from {{ ref('int_wine_quality_features') }}
+    ph,
+    sulphates,
+    alcohol,
+    quality_score
+from wine

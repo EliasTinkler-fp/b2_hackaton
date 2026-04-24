@@ -1,8 +1,15 @@
+<<<<<<< HEAD:ai_project_codex/dbt_project.yml
 name: "ai_project1"
 version: "1.0.0"
 config-version: 2
 
 profile: "fp_hack_hackathon"
+=======
+name: 'b2_warehouse'
+version: '1.0.0'
+config-version: 2
+profile: 'b2_warehouse'
+>>>>>>> bae9ecc35d159a62b9c5a4527d70adc30dd5db75:ai_project1/dbt_project.yml
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -10,13 +17,19 @@ test-paths: ["tests"]
 seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
+<<<<<<< HEAD:ai_project_codex/dbt_project.yml
 docs-paths: ["docs"]
 
+=======
+
+target-path: "target"
+>>>>>>> bae9ecc35d159a62b9c5a4527d70adc30dd5db75:ai_project1/dbt_project.yml
 clean-targets:
   - "target"
   - "dbt_packages"
 
 models:
+<<<<<<< HEAD:ai_project_codex/dbt_project.yml
   ai_project1:
     staging:
       +schema: b2_stg
@@ -26,4 +39,12 @@ models:
       +materialized: view
     marts:
       +schema: b2_mart
+=======
+  b2_warehouse:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: table
+    marts:
+>>>>>>> bae9ecc35d159a62b9c5a4527d70adc30dd5db75:ai_project1/dbt_project.yml
       +materialized: table

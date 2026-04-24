@@ -1,71 +1,108 @@
 version: 2
 
 sources:
-  - name: b2_stg
+  - name: b2
     database: fp_hack
     schema: b2_stg
-    description: "Raw source schema used for hackathon warehouse modeling."
+    description: "Bronze/raw source tables for the B2 hackathon project"
     tables:
       - name: customers
-        description: "Customer master-like records with address and validity timestamps."
+        description: "Customer master data with address, geolocation, and loyalty information"
         columns:
           - name: customer_id
-            description: "Customer identifier from source."
-            tests: [not_null]
+            description: "Unique customer identifier"
+            data_tests:
+              - not_null
           - name: customer_name
-            description: "Raw customer display name."
+            description: "Full customer name"
+          - name: tax_id
+            description: "Tax identification number"
+          - name: tax_code
+            description: "Tax classification code"
+          - name: state
+            description: "State/province"
+          - name: city
+            description: "City name"
+          - name: postcode
+            description: "Postal/ZIP code"
+          - name: street
+            description: "Street name"
+          - name: number
+            description: "Street number"
+          - name: unit
+            description: "Unit/apartment number"
+          - name: region
+            description: "Geographic region"
+          - name: district
+            description: "District within region"
+          - name: lon
+            description: "Longitude coordinate"
+          - name: lat
+            description: "Latitude coordinate"
+          - name: ship_to_address
+            description: "Shipping address (formatted)"
           - name: valid_from
-            description: "Epoch-second effective start timestamp."
+            description: "Record validity start (epoch milliseconds)"
           - name: valid_to
-            description: "Epoch-second effective end timestamp, often null/open."
+            description: "Record validity end"
+          - name: units_purchased
+            description: "Total units purchased by customer"
+          - name: loyalty_segment
+            description: "Customer loyalty segment code"
+
       - name: sales
-        description: "Sales line-level transactional dataset."
+        description: "Sales transaction lines with product and pricing"
         columns:
           - name: customer_id
-            description: "Customer identifier associated with the line."
-            tests: [not_null]
-          - name: order_date
-            description: "Business order date."
-            tests: [not_null]
+            description: "Customer identifier (FK to customers)"
+          - name: customer_name
+            description: "Denormalized customer name"
           - name: product_name
-            description: "Sold product free-text name."
+            description: "Product display name"
+          - name: order_date
+            description: "Date of the sales transaction"
+          - name: product_category
+            description: "Product category classification"
+          - name: product
+            description: "Product code or short name"
           - name: total_price
-            description: "Line total amount."
+            description: "Total price for this line"
+
       - name: sales_orders
-        description: "Order activity/event records with order numbers and epoch timestamps."
+        description: "Sales order headers with order-level details"
         columns:
           - name: order_number
-            description: "Order identifier (not strictly unique in source)."
-            tests: [not_null]
+            description: "Unique order identifier"
+            data_tests:
+              - not_null
           - name: customer_id
-            description: "Customer identifier associated with order."
-            tests: [not_null]
+            description: "Customer identifier (FK to customers)"
+          - name: customer_name
+            description: "Denormalized customer name"
           - name: order_datetime
-            description: "Epoch-second order event timestamp."
-      - name: telco_customer_churn
-        description: "Base telco churn dataset by customer."
-        columns:
-          - name: customerID
-            description: "Telco customer identifier."
-            tests: [not_null, unique]
-          - name: Churn
-            description: "Target churn indicator (Yes/No)."
-      - name: telco_customer_churn_missing
-        description: "Telco churn variant with missing values injected."
-        columns:
-          - name: customerID
-            description: "Telco customer identifier."
-            tests: [not_null, unique]
-      - name: telco_customer_churn_noisy
-        description: "Telco churn variant with noisy/perturbed numeric values."
-        columns:
-          - name: customerID
-            description: "Telco customer identifier."
-            tests: [not_null, unique]
-      - name: wine_quality_analysis
-        description: "Wine physicochemical measures with quality score."
-        columns:
-          - name: quality
-            description: "Wine quality class label."
-            tests: [not_null]
+            description: "Order timestamp (epoch milliseconds)"
+          - name: number_of_line_items
+            description: "Count of line items in the order"
+          - name: clicked_items
+            description: "Items clicked before purchase (JSON)"
+          - name: ordered_products
+            description: "Products in this order (JSON/array)"
+          - name: promo_info
+            description: "Promotion information applied (JSON)"
 
+      - name: telco_customer_churn
+        description: "Telco customer data with service subscriptions and churn status (clean version)"
+        columns:
+          - name: customerID
+            description: "Unique telco customer identifier"
+            data_tests:
+              - not_null
+
+      - name: telco_customer_churn_missing
+        description: "Telco customer churn data with intentionally missing values (for data quality exercises)"
+
+      - name: telco_customer_churn_noisy
+        description: "Telco customer churn data with intentionally noisy values (for data quality exercises)"
+
+      - name: wine_quality_analysis
+        description: "Wine physicochemical properties and quality ratings (UCI Wine Quality dataset)"
