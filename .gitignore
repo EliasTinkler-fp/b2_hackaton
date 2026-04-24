@@ -25,3 +25,7 @@ Thumbs.db
 target/
 dbt_packages/
 logs/
+*.user.yml
+tmp_*.json
+b2_*_tables.json
+.artifacts/

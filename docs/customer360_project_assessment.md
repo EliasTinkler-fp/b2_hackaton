@@ -82,6 +82,90 @@ Det renaste upplagget ar:
 
 Med andra ord: om ni kor vidare pa det nuvarande sparet bor `dim_*` och `fct_*` i slutlagen flyttas eller byggas om till `b2_mart`.
 
+## Verifierade luckor i `b2`-sparet
+
+Efter kontroll mot Databricks metadata for `fp_hack.b2_int` och `fp_hack.b2_mart` ar den viktigaste slutsatsen att **radatan och mellanlagren finns**, men att delar av den slutliga Customer 360-martmodellen fortfarande saknas.
+
+### Finns redan i `b2`
+
+- `dim_customer`
+- `dim_date`
+- `fct_sales`
+
+Notera att dessa idag finns bade i `b2_int` och delvis i `b2_mart`, vilket tyder pa att modellen ar pa vag men inte fullt konsoliderad till ett tydligt konsumtionslager.
+
+### Saknas i `b2`
+
+- `dim_product`
+- `fct_orders`
+- `fct_churn_risk_snapshot`
+
+### Finns tillrackligt underlag for att bygga det saknade?
+
+**Ja, till stor del.**
+
+Det finns redan kolumner och mellanlager som stoder detta:
+
+**For `fct_orders`**
+
+- kalla: `b2_stg.sales_orders`
+- staging: `b2_int.stg_b2_stg__sales_orders`
+- intermediate: `b2_int.int_sales_orders_unified`
+
+Tillgangliga nyckel- och analysfalt inkluderar bland annat:
+
+- `order_number`
+- `customer_id`
+- `order_datetime_ts`
+- `order_date`
+- `number_of_line_items`
+- `clicked_items`
+- `ordered_products`
+- `promo_info`
+
+Det betyder att `fct_orders` inte saknas pa grund av brist pa data, utan pa grund av att modellen inte ar byggd som slutlig mart annu.
+
+**For `fct_churn_risk_snapshot`**
+
+- kalla: `b2_stg.telco_customer_churn`
+- staging: `b2_int.stg_b2_stg__telco_customer_churn`
+- intermediate: `b2_int.int_telco_customer_conformed`
+
+Tillgangliga churn- och intaktsnara falt inkluderar:
+
+- `customer_id`
+- `tenure_months`
+- `contract_type`
+- `payment_method`
+- `monthly_charges_base`
+- `monthly_charges_missing_variant`
+- `monthly_charges_noisy_variant`
+- `total_charges_base`
+- `is_churned_base`
+
+Detta ar tillrackligt for att bygga en snapshot-fakta med churn-status och en intaktsproxy, till exempel `monthly_charges_base` som grund for "at-risk revenue".
+
+**For `dim_product`**
+
+- kalla: `b2_stg.sales`
+- staging: `b2_int.stg_b2_stg__sales`
+
+Tillgangliga produktfalt:
+
+- `product_name`
+- `product_category`
+- `product_brand`
+
+Det betyder att en enkel `dim_product` ocksa ar byggbar med dagens data.
+
+### Praktisk slutsats
+
+For Customer 360-projektet ar problemet alltsa inte att `b2`-schemat saknar kallinformation. Det som saknas ar:
+
+- slutliga dbt-modeller for vissa marts
+- tydlig placering av slutliga facts/dimensions i `b2_mart`
+- tillhorande tests, docs och CI-kontroller
+
 ## Rekommenderad malarkitektur
 
 ### Lager
