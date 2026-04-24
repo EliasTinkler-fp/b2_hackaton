@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+pwsh -File scripts/ai_pre_push_guard.ps1 -BaseRef origin/main -Target ci

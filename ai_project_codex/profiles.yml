@@ -1,11 +1,21 @@
 fp_hack_hackathon:
-  target: dev
+  target: "{{ env_var('DBT_TARGET', 'dev') }}"
   outputs:
     dev:
       type: databricks
-      host: https://adb-7405616827368959.19.azuredatabricks.net
-      http_path: /sql/1.0/warehouses/cfe55031a9b649cb
-      catalog: fp_hack
-      schema: ""
-      threads: 4
-      auth_type: oauth
+      host: "{{ env_var('DBT_DATABRICKS_HOST', 'https://adb-7405616827368959.19.azuredatabricks.net') }}"
+      http_path: "{{ env_var('DBT_DATABRICKS_HTTP_PATH', '/sql/1.0/warehouses/cfe55031a9b649cb') }}"
+      catalog: "{{ env_var('DBT_DATABRICKS_CATALOG', 'fp_hack') }}"
+      schema: "{{ env_var('DBT_DATABRICKS_SCHEMA', 'b2_dev') }}"
+      threads: "{{ env_var('DBT_THREADS', '4') | int }}"
+      auth_type: "{{ env_var('DBT_DATABRICKS_AUTH_TYPE', 'oauth') }}"
+      token: "{{ env_var('DBT_DATABRICKS_TOKEN', '') }}"
+    ci:
+      type: databricks
+      host: "{{ env_var('DBT_DATABRICKS_HOST', 'https://adb-7405616827368959.19.azuredatabricks.net') }}"
+      http_path: "{{ env_var('DBT_DATABRICKS_HTTP_PATH', '/sql/1.0/warehouses/cfe55031a9b649cb') }}"
+      catalog: "{{ env_var('DBT_DATABRICKS_CATALOG', 'fp_hack') }}"
+      schema: "{{ env_var('DBT_CI_SCHEMA', 'b2_ci_default') }}"
+      threads: "{{ env_var('DBT_THREADS', '4') | int }}"
+      auth_type: "{{ env_var('DBT_DATABRICKS_CI_AUTH_TYPE', 'pat') }}"
+      token: "{{ env_var('DBT_DATABRICKS_TOKEN', '') }}"
