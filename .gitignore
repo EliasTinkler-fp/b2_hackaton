@@ -2,6 +2,7 @@
 node_modules/
 venv/
 .venv/
+**/.venv/
 __pycache__/
 
 # Environment
@@ -17,3 +18,5 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+*.pyc

@@ -84,7 +84,10 @@ uvx uc-mcp-proxy --help
 ### 2a. Check whether your Databricks profile exists
 
 ```bash
-grep -A4 "\[PROFILE_NAME\]" ~/.databrickscfg
+grep -A4 "\[adb-7405616827368959\]" ~/.databrickscfg
+```
+```bash
+grep -A4 "\[eliast\]" ~/.databrickscfg
 ```
 
 Replace `PROFILE_NAME` with your actual profile name, for example:
@@ -99,7 +102,7 @@ grep -A4 "\[MHTEST\]" ~/.databrickscfg
 ### 2b. Authenticate if needed
 
 ```bash
-databricks auth login --profile PROFILE_NAME
+databricks auth login --profile eliast
 ```
 
 This opens a browser window for OAuth sign-in. The user must complete this step themselves.
@@ -107,7 +110,7 @@ This opens a browser window for OAuth sign-in. The user must complete this step 
 ### 2c. Verify the profile works
 
 ```bash
-databricks current-user me --profile PROFILE_NAME
+databricks current-user me --profile eliast
 ```
 
 - **Expected:** JSON with your Databricks user information
@@ -126,7 +129,7 @@ codex mcp add databricks-sql -- \
   uvx uc-mcp-proxy \
   --url https://adb-7405616827368959.19.azuredatabricks.net/api/2.0/mcp/sql \
   --auth-type databricks-cli \
-  --profile MHTEST
+  --profile eliast
 ```
 
 Replace:
