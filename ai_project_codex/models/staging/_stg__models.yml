@@ -3,42 +3,113 @@ version: 2
 models:
   - name: stg_b2__customers
     description: "Staged customer master data with standardized column names and types"
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "units_purchased >= 0"
     columns:
       - name: customer_id
         description: "Unique customer identifier"
         data_tests:
           - unique
           - not_null
+      - name: loyalty_segment
+        description: "Customer loyalty segment code."
+        data_tests:
+          - not_null
 
   - name: stg_b2__sales
     description: "Staged sales transaction lines with surrogate key"
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "total_price >= 0"
     columns:
       - name: sales_line_key
         description: "Surrogate key for sales line"
         data_tests:
           - unique
           - not_null
+      - name: customer_id
+        description: "Customer identifier from source."
+        data_tests:
+          - not_null
+      - name: order_date
+        description: "Order date for transaction line."
+        data_tests:
+          - not_null
 
   - name: stg_b2__sales_orders
     description: "Staged sales order headers"
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "number_of_line_items >= 0"
     columns:
       - name: order_number
         description: "Unique order identifier"
         data_tests:
           - unique
           - not_null
+      - name: customer_id
+        description: "Customer identifier linked to the order."
+        data_tests:
+          - not_null
+      - name: ordered_at
+        description: "Order timestamp. May be null when source order_datetime is missing."
 
   - name: stg_b2__telco_customer_churn
     description: "Staged telco customer churn data (clean version)"
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "tenure_months >= 0"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "monthly_charges >= 0"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "coalesce(total_charges, 0) >= 0"
     columns:
       - name: customer_id
         description: "Unique telco customer identifier"
         data_tests:
           - unique
           - not_null
+      - name: is_senior_citizen
+        description: "Binary senior-citizen indicator."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+      - name: has_partner
+        description: "Whether customer has a partner."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Yes', 'No']
+      - name: has_dependents
+        description: "Whether customer has dependents."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Yes', 'No']
+      - name: churn_status
+        description: "Customer churn label."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['Yes', 'No']
 
   - name: stg_b2__wine_quality
     description: "Staged wine quality analysis data with surrogate key"
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "quality_score between 0 and 10"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "alcohol >= 0"
     columns:
       - name: wine_sample_key
         description: "Surrogate key for wine sample"

@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: int_orders_enriched
+    description: "Order enrichment intermediate model combining order headers with customer attributes. Grain: one row per order_number. Primary key: order_number. Intended as a reusable semantic layer for downstream marts and app reporting."
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "number_of_line_items >= 0"
+    columns:
+      - name: order_number
+        description: "Order identifier at the model grain."
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Customer reference used to join order context to customer mart entities."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_b2__customers')
+                field: customer_id
+      - name: ordered_at
+        description: "Order timestamp used for time-based analyses."
+      - name: number_of_line_items
+        description: "Count of purchased line items in the order."
+
+  - name: int_telco_services_pivoted
+    description: "Intermediate telco feature model with customer attributes and derived service adoption score. Grain: one row per customer_id. Primary key: customer_id. Designed to support churn marts and risk analysis features."
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "active_service_count >= 0"
+    columns:
+      - name: customer_id
+        description: "Telco customer identifier at model grain."
+        data_tests:
+          - unique
+          - not_null
+      - name: active_service_count
+        description: "Derived count of active subscribed services per customer."
+      - name: churn_status
+        description: "Raw churn label used to derive churn indicators downstream."
+      - name: monthly_charges
+        description: "Current monthly charge used in churn and value analysis."
+      - name: total_charges
+        description: "Accumulated charges used for tenure/value context."

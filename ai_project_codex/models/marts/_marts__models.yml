@@ -2,42 +2,58 @@ version: 2
 
 models:
   - name: dim_customer
-    description: "Customer dimension with demographics, address, and loyalty data"
+    description: "Customer 360 dimension for customer profiling and segmentation. Grain: one row per customer_id. Primary key: customer_id. Used by sales marts to analyze revenue by customer, geography, and loyalty segment."
     columns:
       - name: customer_id
-        description: "Primary key"
+        description: "Primary key for the customer dimension."
         data_tests:
           - unique
           - not_null
+      - name: loyalty_segment
+        description: "Business-defined loyalty segment for customer value analysis."
+      - name: units_purchased
+        description: "Cumulative purchased units captured in source customer profile."
 
   - name: dim_product
-    description: "Product dimension derived from sales data"
+    description: "Product dimension used to slice sales by product and category. Grain: one row per product_code. Primary key: product_key."
     columns:
       - name: product_key
-        description: "Surrogate primary key"
+        description: "Surrogate primary key for product dimension."
         data_tests:
           - unique
           - not_null
+      - name: product_code
+        description: "Natural product identifier from source sales data."
+      - name: product_category
+        description: "Business product category used for portfolio and revenue analysis."
 
   - name: dim_telco_customer
-    description: "Telco customer dimension with demographics and service subscriptions"
+    description: "Telco customer profile dimension for churn analysis. Grain: one row per telco_customer_id. Primary key: telco_customer_id."
     columns:
       - name: telco_customer_id
-        description: "Primary key"
+        description: "Primary key for telco customer dimension."
         data_tests:
           - unique
           - not_null
+      - name: contract_type
+        description: "Current customer contract type used for churn risk segmentation."
+      - name: internet_service_type
+        description: "Internet service category used for service-mix and churn analysis."
 
   - name: fct_sales
-    description: "Sales fact table at transaction line grain"
+    description: "Sales fact table for revenue analysis in Customer 360 reporting. Grain: one row per sales line (sales_line_key). Primary key: sales_line_key. Foreign keys: customer_id -> dim_customer.customer_id, product_key -> dim_product.product_key. Key metric: total_price."
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "total_price >= 0"
     columns:
       - name: sales_line_key
-        description: "Surrogate primary key"
+        description: "Surrogate primary key for each sales line."
         data_tests:
           - unique
           - not_null
       - name: customer_id
-        description: "FK to dim_customer"
+        description: "Foreign key to customer dimension."
         data_tests:
           - not_null
           - relationships:
@@ -45,18 +61,30 @@ models:
                 to: ref('dim_customer')
                 field: customer_id
       - name: product_key
-        description: "FK to dim_product"
+        description: "Foreign key to product dimension."
         data_tests:
+          - not_null
           - relationships:
               arguments:
                 to: ref('dim_product')
                 field: product_key
+      - name: order_date
+        description: "Business transaction date for time-based revenue analysis."
+      - name: total_price
+        description: "Revenue amount at sales line level."
 
   - name: fct_telco_churn
-    description: "Telco churn fact at customer grain"
+    description: "Telco churn fact used to analyze churn status and revenue exposure. Grain: one row per telco customer. Primary key: telco_customer_id. Foreign key: telco_customer_id -> dim_telco_customer.telco_customer_id. Key metrics: monthly_charges, total_charges, is_churned."
+    data_tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "monthly_charges >= 0"
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "coalesce(total_charges, 0) >= 0"
     columns:
       - name: telco_customer_id
-        description: "FK to dim_telco_customer"
+        description: "Primary key and foreign key to dim_telco_customer."
         data_tests:
           - unique
           - not_null
@@ -64,12 +92,28 @@ models:
               arguments:
                 to: ref('dim_telco_customer')
                 field: telco_customer_id
+      - name: churn_status
+        description: "Source churn label used for churn-rate reporting."
+      - name: is_churned
+        description: "Binary churn indicator (1 = churned, 0 = retained)."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+      - name: monthly_charges
+        description: "Current recurring monthly charge per customer."
+      - name: total_charges
+        description: "Lifetime billed amount used for customer value context."
 
   - name: fct_wine_quality
-    description: "Wine quality fact table (standalone, no dimensional joins)"
+    description: "Standalone wine sample fact used for quality modeling experiments. Grain: one row per wine sample. Primary key: wine_sample_key. Key metric: quality_score."
     columns:
       - name: wine_sample_key
-        description: "Surrogate primary key"
+        description: "Surrogate primary key for wine sample."
         data_tests:
           - unique
           - not_null
+      - name: alcohol
+        description: "Alcohol content feature for quality analysis."
+      - name: quality_score
+        description: "Observed wine quality rating."

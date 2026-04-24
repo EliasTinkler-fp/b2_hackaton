@@ -1,0 +1,15 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# dbt generated artifacts
+target/
+logs/
+dbt_packages/
+dbt_packages_vendor/
+dbt.log
+
+# Local/editor
+.DS_Store
+Thumbs.db
